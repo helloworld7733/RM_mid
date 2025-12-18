@@ -7,5 +7,5 @@ using namespace std;
 class Lexicon
 {
 public:
-	unordered_map<string, int> construct_English_lexicon(unordered_map<string, int> mp);//查找得分并返回
+	void construct_English_lexicon(unordered_map<string, int>& mp);//利用哈希表构建词表
 };

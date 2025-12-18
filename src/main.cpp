@@ -5,11 +5,13 @@
 #include"Lexicon.h"
 #include"Tokenizer.h"
 #include<fstream>
+#include<vector>
 #include<unordered_map>
+#include<unordered_set>
 using namespace std;
 
 unordered_map<string, int>mp;
-
+unordered_set<string> st_list;
 void showmenu()
 {
 	cout << "欢迎使用立场检测系统，请选择您的输入方式 (1/2)：" << endl;
@@ -17,7 +19,7 @@ void showmenu()
 	cout << "2. 文件读入" << endl;
 
 }
-void Stance_analysis(string s)
+vector<string> Stance_analysis(string s)
 {
 	//第一步：预处理
 	//去除标点符号
@@ -27,38 +29,44 @@ void Stance_analysis(string s)
 	//全部字符转小写
 	string s_lower = process_obj.To_lower(s_nop);
 
-	//去除常见停用词
-	string s_clean = process_obj.remove_stopwords(s_lower);
-
 	//第二步：分词
-	char arr[110] = { 0 };//用于存放分词后的单词
+	vector<string> tokenized_words;//用于存放分词后的单词
 	Tokenizer tokenizer_obj;
-	tokenizer_obj.Tokenizer_to_words(s_clean,arr);
+	tokenized_words=tokenizer_obj.Tokenizer_to_words(s_lower);
 
-	//第三步：查找词典的哈希表，计算句子得分，进行立场检测
-	StanceDetection stancedetection_obj;
-	int score = stancedetection_obj.cal_score(arr);
-	stancedetection_obj.classifier(score);
+	//去除停用词
+	vector<string> words_nost;//去除停用词后的分词表
+	words_nost = tokenizer_obj.remove_stopwords(tokenized_words, st_list);
 
+	////第三步：查找词典的哈希表，计算句子得分，进行立场检测
+	//StanceDetection stancedetection_obj;
+	//int score = stancedetection_obj.cal_score(words_nost);
+	//stancedetection_obj.classifier(score);
+	return words_nost;
 
 }
 int main()
 {
-	//初始化，预先构建词表空间
-	Lexicon lexicon_obj;
-	lexicon_obj.construct_English_lexicon(mp);
-	
+	//初始化，预先构建词表空间和停用词表空间
+	//Lexicon lexicon_obj;
+	//lexicon_obj.construct_English_lexicon(mp);
+	//
+	Tokenizer stopword_obj;
+	stopword_obj.construct_stopword_list(st_list);
+
 	while(1)
 	{
 		showmenu();
 		int choice;
 		cin >> choice;
+		cin.ignore();
 		StanceDetection obj;
 		string s;//用来存放待检测文本
 		if (choice == 1)
 		{
 			cout << "输入您的文本：(不超过100词)" << endl;
-			cin >> s;
+			getline(cin, s);
+			//cin.ignore();
 		}
 		else
 		{
@@ -67,7 +75,11 @@ int main()
 			std::ifstream file(file_name, ios::in);
 			getline(file, s);
 		}
-		Stance_analysis(s);
+		vector<string> sen=Stance_analysis(s);
+		for (auto e : sen)
+		{
+			cout << e << endl;
+		}
 		cout << "本次立场检测结束，请问您是否还想继续？(y/n)" << endl;
 		char c; cin >> c;
 		if (c == 'n') break;

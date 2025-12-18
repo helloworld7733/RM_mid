@@ -9,6 +9,5 @@ class Preprocess
 public:
 	string remove_punctuation(string sentence);
 	string To_lower(string sentence);
-	string remove_stopwords(string sentence);
 
 };

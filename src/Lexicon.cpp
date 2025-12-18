@@ -5,7 +5,7 @@ using namespace std;
 #include<fstream>
 #include<unordered_map>
 
-unordered_map<string, int> Lexicon::construct_English_lexicon(unordered_map<string,int> mp)
+void Lexicon::construct_English_lexicon(unordered_map<string,int>& mp)
 {
 	//先将词表单词构建哈希表，方便后续快速查找
 	std::ifstream file("AFINN-en-165.txt", ios::in);
