@@ -50,3 +50,20 @@ vector<string> Tokenizer::remove_stopwords(vector<string> src_arr,unordered_set<
 	}
 	return dest_arr;
 }
+
+void Tokenizer::check_neg(vector<string> arr, unordered_set<string> neg_list)
+{
+	for (auto e : arr)
+	{
+		if (neg_list.count(e) != 0)
+		{
+			flag_neg = true;
+			return;
+		}
+		if (e.size()>=2&&e[e.size() - 2] == 39&& e[e.size() - 1]=='t'&& e[e.size() - 3]=='n')//¼ì²ân't
+		{
+			flag_neg = true;
+			return;
+		}
+	}
+}

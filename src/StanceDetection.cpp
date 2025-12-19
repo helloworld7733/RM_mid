@@ -7,7 +7,7 @@
 #include<unordered_set>
 using namespace std;
 
-int StanceDetection::cal_score(vector<string> word_arr)
+int StanceDetection::cal_score(vector<string> word_arr,bool neg_flag)
 {
 	int score = 0;
 	int i = 0;
@@ -46,6 +46,8 @@ int StanceDetection::cal_score(vector<string> word_arr)
 		
 		
 	}
+	if (neg_flag)//如果有否定词，立场检测结果翻转
+		score = 0 - score;
 	return score;
 }
 

@@ -4,6 +4,7 @@
 #include"Preprocess.h"
 #include"Lexicon.h"
 #include"Tokenizer.h"
+#include"Negword.h"
 #include<fstream>
 #include<vector>
 #include<unordered_map>
@@ -13,6 +14,8 @@ using namespace std;
 
 unordered_map<string, int>mp;//情感分析词表：(word/phrase,score)
 unordered_set<string> st_list;//停用词表
+bool flag_neg;//否定标志，若为true则立场检测情况翻转
+unordered_set<string> neg_list;//否定词表
 void showmenu()
 {
 	cout << "欢迎使用立场检测系统，请选择您的输入方式 (1/2)：" << endl;
@@ -40,27 +43,33 @@ void Stance_analysis(string s)
 
 	//第二步：分词
 	vector<string> tokenized_words;//用于存放分词后的单词
-	Tokenizer tokenizer_obj(st_list);
+	Tokenizer tokenizer_obj(st_list,flag_neg);
 	tokenized_words=tokenizer_obj.Tokenizer_to_words(s_lower);
 
-	//去除停用词
+	//去除停用词并检测否定词
 	vector<string> words_nost;//去除停用词后的分词表
 	words_nost = tokenizer_obj.remove_stopwords(tokenized_words, st_list);
 
+	//否定词检测
+	tokenizer_obj.check_neg(words_nost, neg_list);
+	
 	////第三步：查找词典的哈希表，计算句子得分，进行立场检测
 	StanceDetection stancedetection_obj(mp);
-	int score = stancedetection_obj.cal_score(words_nost);
+	int score = stancedetection_obj.cal_score(words_nost,flag_neg);
 	stancedetection_obj.classifier(score);
-
+	
 }
 int main()
 {
-	//初始化，预先构建词表空间和停用词表空间
+	//初始化，预先构建词表空间,停用词表空间和否定词空间
 	Lexicon lexicon_obj(mp);
 	lexicon_obj.construct_datatable();
 	
-	Tokenizer stopword_obj(st_list);
+	Tokenizer stopword_obj(st_list,flag_neg);
 	stopword_obj.construct_datatable();
+
+	Negword_list neg_obj(neg_list);
+	neg_obj.construct_datatable();
 
 	while(1)
 	{
@@ -133,6 +142,7 @@ int main()
 			}
 			break;
 		}
+		flag_neg = false;//重置
 	}
 	return 0;
 }
