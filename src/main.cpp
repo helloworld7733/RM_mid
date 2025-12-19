@@ -19,7 +19,7 @@ void showmenu()
 	cout << "2. 文件读入" << endl;
 
 }
-vector<string> Stance_analysis(string s)
+void Stance_analysis(string s)
 {
 	//第一步：预处理
 	//去除标点符号
@@ -39,10 +39,9 @@ vector<string> Stance_analysis(string s)
 	words_nost = tokenizer_obj.remove_stopwords(tokenized_words, st_list);
 
 	////第三步：查找词典的哈希表，计算句子得分，进行立场检测
-	//StanceDetection stancedetection_obj;
-	//int score = stancedetection_obj.cal_score(words_nost);
-	//stancedetection_obj.classifier(score);
-	return words_nost;
+	StanceDetection stancedetection_obj(mp);
+	int score = stancedetection_obj.cal_score(words_nost);
+	stancedetection_obj.classifier(score);
 
 }
 int main()
@@ -75,11 +74,7 @@ int main()
 			std::ifstream file(file_name, ios::in);
 			getline(file, s);
 		}
-		vector<string> sen=Stance_analysis(s);
-		for (auto e : sen)
-		{
-			cout << e << endl;
-		}
+		Stance_analysis(s);
 		cout << "本次立场检测结束，请问您是否还想继续？(y/n)" << endl;
 		char c; cin >> c;
 		if (c == 'n') break;
