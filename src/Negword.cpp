@@ -10,7 +10,7 @@ using namespace std;
 
 void Negword_list::construct_datatable()
 {
-	std::ifstream file("negative_words.txt", ios::in);
+	std::ifstream file("D:/RM_mid/data/negative_words.txt", ios::in);
 	string element;
 	while (file >> element)
 	{

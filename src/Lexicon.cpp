@@ -8,7 +8,7 @@ using namespace std;
 void Lexicon::construct_datatable()
 {
 	//先将词表单词构建哈希表，方便后续快速查找
-	std::ifstream file("AFINN-en-165.txt", ios::in);
+	std::ifstream file("D:/RM_mid/data/AFINN-en-165.txt", ios::in);
 	string data;
 	while (getline(file, data))
 	{

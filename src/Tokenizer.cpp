@@ -9,11 +9,11 @@ using namespace std;
 
 vector<string> Tokenizer::Tokenizer_to_words(string text)
 {
-	vector<string> arr_dest;//Ê¹ÓÃSTLÀï¶¯Ì¬ÉìËõ³¤¶ÈµÄvector£¬×÷Îª×îÖÕ·µ»ØµÄ×Ö·û´®Êý×é
+	vector<string> arr_dest;//Ê¹ï¿½ï¿½STLï¿½ï¶¯Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½vectorï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Õ·ï¿½ï¿½Øµï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int i = 0;
 	while (i < text.size())
 	{
-		string element;//Ã¿¸ö¼´½«´æÈëµÄÔªËØ
+		string element;//Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 		while (text[i] != ' '&&i<=text.size()-1)
 		{
 			element += text[i];
@@ -28,8 +28,8 @@ vector<string> Tokenizer::Tokenizer_to_words(string text)
 
 void Tokenizer::construct_datatable()
 {
-	std::ifstream file("stopword.txt", ios::in);
-	//Ê¹ÓÃSTLµÄunordered_setÀ´´æ·ÅÍ£ÓÃ´Ê£¬±ãÓÚºóÐø¿ìËÙ²éÕÒ
+	std::ifstream file("D:/RM_mid/data/stopword.txt", ios::in);
+	//Ê¹ï¿½ï¿½STLï¿½ï¿½unordered_setï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½Ã´Ê£ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù²ï¿½ï¿½ï¿½
 	string element;
 	while (file >> element)
 	{
@@ -40,10 +40,10 @@ void Tokenizer::construct_datatable()
 vector<string> Tokenizer::remove_stopwords(vector<string> src_arr,unordered_set<string> st_list)
 {
 	vector<string> dest_arr;
-	//ÔÚÍ£ÓÃ´Ê±íÀï²éÕÒ
+	//ï¿½ï¿½Í£ï¿½Ã´Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	for (int i = 0; i < src_arr.size(); i++)
 	{
-		if (st_list.count(src_arr[i]) == 0)//²»ÊÇÍ£ÓÃ´Ê
+		if (st_list.count(src_arr[i]) == 0)//ï¿½ï¿½ï¿½ï¿½Í£ï¿½Ã´ï¿½
 		{
 			dest_arr.push_back(src_arr[i]);
 		}
@@ -60,7 +60,7 @@ void Tokenizer::check_neg(vector<string> arr, unordered_set<string> neg_list)
 			flag_neg = true;
 			return;
 		}
-		if (e.size()>=2&&e[e.size() - 2] == 39&& e[e.size() - 1]=='t'&& e[e.size() - 3]=='n')//¼ì²ân't
+		if (e.size()>=2&&e[e.size() - 2] == 39&& e[e.size() - 1]=='t'&& e[e.size() - 3]=='n')//ï¿½ï¿½ï¿½n't
 		{
 			flag_neg = true;
 			return;
