@@ -26,9 +26,9 @@ vector<string> Tokenizer::Tokenizer_to_words(string text)
 	return arr_dest;
 }
 
-void Tokenizer::construct_stopword_list(unordered_set<string>& st_list)
+void Tokenizer::construct_datatable()
 {
-	std::ifstream file("../data/stopword.txt", ios::in);
+	std::ifstream file("stopword.txt", ios::in);
 	//使用STL的unordered_set来存放停用词，便于后续快速查找
 	string element;
 	while (file >> element)

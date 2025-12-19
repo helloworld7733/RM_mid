@@ -4,6 +4,7 @@
 
 
 using namespace std;
+//使用聚合：Preprocess是一个聚合类
 class Preprocess
 {
 public:

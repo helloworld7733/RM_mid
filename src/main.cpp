@@ -10,8 +10,8 @@
 #include<unordered_set>
 using namespace std;
 
-unordered_map<string, int>mp;
-unordered_set<string> st_list;
+unordered_map<string, int>mp;//情感分析词表：(word/phrase,score)
+unordered_set<string> st_list;//停用词表
 void showmenu()
 {
 	cout << "欢迎使用立场检测系统，请选择您的输入方式 (1/2)：" << endl;
@@ -31,7 +31,7 @@ vector<string> Stance_analysis(string s)
 
 	//第二步：分词
 	vector<string> tokenized_words;//用于存放分词后的单词
-	Tokenizer tokenizer_obj;
+	Tokenizer tokenizer_obj(st_list);
 	tokenized_words=tokenizer_obj.Tokenizer_to_words(s_lower);
 
 	//去除停用词
@@ -48,11 +48,11 @@ vector<string> Stance_analysis(string s)
 int main()
 {
 	//初始化，预先构建词表空间和停用词表空间
-	//Lexicon lexicon_obj;
-	//lexicon_obj.construct_English_lexicon(mp);
-	//
-	Tokenizer stopword_obj;
-	stopword_obj.construct_stopword_list(st_list);
+	Lexicon lexicon_obj(mp);
+	lexicon_obj.construct_datatable();
+	
+	Tokenizer stopword_obj(st_list);
+	stopword_obj.construct_datatable();
 
 	while(1)
 	{
@@ -60,7 +60,7 @@ int main()
 		int choice;
 		cin >> choice;
 		cin.ignore();
-		StanceDetection obj;
+		StanceDetection obj(mp);
 		string s;//用来存放待检测文本
 		if (choice == 1)
 		{
