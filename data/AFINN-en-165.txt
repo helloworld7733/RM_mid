@@ -423,7 +423,6 @@ calm	2
 calmed	2
 calming	2
 calms	2
-can't stand	-3
 cancel	-1
 cancelled	-1
 cancelling	-1
@@ -1006,14 +1005,12 @@ diverting	-1
 dizzy	-1
 dodging	-2
 dodgy	-2
-does not work	-3
 dolorous	-2
 donate	2
 donated	2
 donates	2
 donating	2
 donation	2
-dont like	-2
 doom	-2
 doomed	-2
 doubt	-1
@@ -2176,8 +2173,6 @@ nice	3
 nifty	2
 niggas	-5
 nigger	-5
-no	-1
-no fun	-3
 noble	2
 noblest	2
 noisy	-1
@@ -2185,8 +2180,6 @@ non-approved	-2
 nonsense	-2
 noob	-2
 nosey	-2
-not good	-2
-not working	-3
 notable	2
 noticeable	2
 notorious	-2
@@ -3339,6 +3332,8 @@ worn	-1
 worried	-3
 worries	-3
 worry	-3
+work	1
+works	1
 worrying	-3
 worse	-3
 worsen	-3
