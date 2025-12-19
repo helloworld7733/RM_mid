@@ -1,0 +1,10 @@
+^D:\RM_MID\BUILD\CMAKEFILES\FA25621D1D341E7772A8006D537C8D67\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/RM_mid -BD:/RM_mid/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/RM_mid/build/StanceDetection_sys.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
