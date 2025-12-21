@@ -14,6 +14,6 @@ void Negword_list::construct_datatable()
 	string element;
 	while (file >> element)
 	{
-		neg_list.insert(element);
+		neg_list.insert(element);//使用set 构建否定词表
 	}
 }

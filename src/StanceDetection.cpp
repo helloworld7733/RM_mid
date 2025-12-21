@@ -7,7 +7,7 @@
 #include<unordered_set>
 using namespace std;
 
-int StanceDetection::cal_score(vector<string> word_arr,bool neg_flag)
+int StanceDetection::cal_score(vector<string> word_arr,bool neg_flag)//计算情感倾向得分，正则代表积极，负则代表消极，0为中立
 {
 	int score = 0;
 	int i = 0;
@@ -26,7 +26,7 @@ int StanceDetection::cal_score(vector<string> word_arr,bool neg_flag)
 				flag = false;//避免后续再次读入分数
 			}
 		}
-		if(flag&&i + 1 < word_arr.size())
+		if(flag&&i + 1 < word_arr.size())//考虑长度为2的短语
 		{
 			string phrase2 = word_arr[i] + "_" + word_arr[i + 1];
 			if (mp[phrase2] != 0)

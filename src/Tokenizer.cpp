@@ -7,13 +7,13 @@
 #include<unordered_set>
 using namespace std;
 
-vector<string> Tokenizer::Tokenizer_to_words(string text)
+vector<string> Tokenizer::Tokenizer_to_words(string text)//·Ö´Ê
 {
-	vector<string> arr_dest;//Ê¹ï¿½ï¿½STLï¿½ï¶¯Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½vectorï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Õ·ï¿½ï¿½Øµï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	vector<string> arr_dest;//Ê¹ÓÃSTLÀï¶¯Ì¬ÉìËõ³¤¶ÈµÄvector£¬×÷Îª×îÖÕ·µ»ØµÄ×Ö·û´®Êı×é
 	int i = 0;
 	while (i < text.size())
 	{
-		string element;//Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+		string element;//Ã¿¸ö¼´½«´æÈëµÄÔªËØ
 		while (text[i] != ' '&&i<=text.size()-1)
 		{
 			element += text[i];
@@ -26,10 +26,10 @@ vector<string> Tokenizer::Tokenizer_to_words(string text)
 	return arr_dest;
 }
 
-void Tokenizer::construct_datatable()
+void Tokenizer::construct_datatable()//¹¹½¨Í£ÓÃ´Ê±í
 {
 	std::ifstream file("D:/RM_mid/data/stopword.txt", ios::in);
-	//Ê¹ï¿½ï¿½STLï¿½ï¿½unordered_setï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½Ã´Ê£ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù²ï¿½ï¿½ï¿½
+	//Ê¹ÓÃSTLµÄunordered_setÀ´´æ·ÅÍ£ÓÃ´Ê£¬±ãÓÚºóĞø¿ìËÙ²éÕÒ
 	string element;
 	while (file >> element)
 	{
@@ -40,10 +40,10 @@ void Tokenizer::construct_datatable()
 vector<string> Tokenizer::remove_stopwords(vector<string> src_arr,unordered_set<string> st_list)
 {
 	vector<string> dest_arr;
-	//ï¿½ï¿½Í£ï¿½Ã´Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ÔÚÍ£ÓÃ´Ê±íÀï²éÕÒ£¬Èç¹ûÊÇÍ£ÓÃ´Ê£¬ÔòÈ¥³ı¸Ãµ¥´Ê£¨¶ÔÁ¢³¡¼ì²âÎŞÓÃ£©
 	for (int i = 0; i < src_arr.size(); i++)
 	{
-		if (st_list.count(src_arr[i]) == 0)//ï¿½ï¿½ï¿½ï¿½Í£ï¿½Ã´ï¿½
+		if (st_list.count(src_arr[i]) == 0)//²»ÊÇÍ£ÓÃ´Ê
 		{
 			dest_arr.push_back(src_arr[i]);
 		}
@@ -53,6 +53,7 @@ vector<string> Tokenizer::remove_stopwords(vector<string> src_arr,unordered_set<
 
 void Tokenizer::check_neg(vector<string> arr, unordered_set<string> neg_list)
 {
+	//¼ì²éÊÇ·ñÓĞ¸ºÃæ´Ê£¬Èçnot,noµÈ£¬Èç¹ûÓĞ£¬Ôò½«¾ä×ÓÁ¢³¡¼ì²âÇé¿ö·­×ª
 	for (auto e : arr)
 	{
 		if (neg_list.count(e) != 0)
@@ -60,7 +61,7 @@ void Tokenizer::check_neg(vector<string> arr, unordered_set<string> neg_list)
 			flag_neg = true;
 			return;
 		}
-		if (e.size()>=2&&e[e.size() - 2] == 39&& e[e.size() - 1]=='t'&& e[e.size() - 3]=='n')//ï¿½ï¿½ï¿½n't
+		if (e.size()>=2&&e[e.size() - 2] == 39&& e[e.size() - 1]=='t'&& e[e.size() - 3]=='n')//¼ì²ân't
 		{
 			flag_neg = true;
 			return;

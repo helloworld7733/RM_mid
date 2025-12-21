@@ -8,7 +8,7 @@ using namespace std;
 class Preprocess
 {
 public:
-	string remove_punctuation(string sentence);
-	string To_lower(string sentence);
+	string remove_punctuation(string sentence);//去除标点符号
+	string To_lower(string sentence);//全部字母转为小写
 
 };

@@ -9,6 +9,7 @@
 #include"DataTable.h"
 using namespace std;
 
+//否定词类，继承datatable构建否定词表
 class Negword_list :public Datatable
 {
 private:

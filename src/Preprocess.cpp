@@ -15,7 +15,7 @@ string Preprocess::remove_punctuation(string text)
 			s_dest += text[i];
 		}
 	}
-	return s_dest;
+	return s_dest;//不含标点符号
 }
 
 string Preprocess::To_lower(string text)
@@ -29,6 +29,6 @@ string Preprocess::To_lower(string text)
 		}
 		else s_dest += text[i];
 	}
-	return s_dest;
+	return s_dest;//全是小写字母
 }
 
